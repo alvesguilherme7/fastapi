@@ -74,7 +74,7 @@ public class FastAPIClient {
          * Use em conjunto com [setFunctionGetTokenArmazenado]
          */
         @SuppressWarnings("unused")
-        public Builder setFunctionArmazenarFunction(Consumer<Token> consumer){
+        public Builder setFunctionSalvarTokenArmazenado(Consumer<Token> consumer){
             this.funcSalvarToken = consumer;
             return this;
         }

@@ -18,8 +18,8 @@ o token da seguinte forma:
 FastAPIClient api = new FastAPIClient.Builder()
     .setUrl("https://api.exemplo.com.br")
     .setCredenciais("usuario", "senha")
-    .setFunctionArmazenarFunction(token -> {
-        // salvar o token da forma que for coviniente e durável
+    .setFunctionSalvarTokenArmazenado(token -> {
+        // salvar o token da forma que for conveniente e durável
     })
     .setFunctionGetTokenArmazenado(() -> {
         // retornar o token do armazenamento durável
