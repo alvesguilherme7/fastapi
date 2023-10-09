@@ -11,14 +11,15 @@ import okhttp3.Response;
 import java.io.IOException;
 import java.util.Objects;
 
-public class ClienteFornecedorAPI extends ChamadaAPI {
+public class ClienteFornecedorAPI extends API {
+    public static final String ENDPOINT_CLIENTE_FORNECEDOR = "clientefornecedor";
     private final OkHttpClient client;
     private final String uri;
 
     public ClienteFornecedorAPI(OkHttpClient client, FastAPIConfig fastAPiConfig) {
         this.client = client;
         this.uri = new URLUtils(fastAPiConfig.getUrl())
-                .addPath("clientefornecedor")
+                .addPath(ENDPOINT_CLIENTE_FORNECEDOR)
                 .build();
     }
 

@@ -1,6 +1,6 @@
 package com.alvesguilherme.fastapi.auth;
 
-import com.alvesguilherme.fastapi.api.ChamadaAPI;
+import com.alvesguilherme.fastapi.api.API;
 import com.alvesguilherme.fastapi.client.FastAPIConfig;
 import com.alvesguilherme.fastapi.model.Token;
 import com.alvesguilherme.fastapi.utils.URLUtils;
@@ -11,7 +11,7 @@ import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
-public class AuthAPI extends ChamadaAPI {
+public class AuthAPI extends API {
     private final OkHttpClient clientAuth;
     private final FastAPIConfig config;
     private Token token;

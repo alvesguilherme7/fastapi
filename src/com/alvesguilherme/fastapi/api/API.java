@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.Objects;
 import java.util.logging.Logger;
 
-public class ChamadaAPI {
+public class API {
     protected final Logger logger = Logger.getLogger(FastAPIClient.class.getName());
     protected final MediaType jsonMediaType = MediaType.parse("application/json");
     protected final Gson gson = new Gson();

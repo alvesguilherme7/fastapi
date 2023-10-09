@@ -1,10 +1,12 @@
 package com.alvesguilherme.fastapi.client;
 
 import com.alvesguilherme.fastapi.api.ClienteFornecedorAPI;
+import com.alvesguilherme.fastapi.api.LancamentoAPI;
 import com.alvesguilherme.fastapi.auth.AuthAPI;
 import com.alvesguilherme.fastapi.interceptor.AuthInterceptor;
 import com.alvesguilherme.fastapi.interceptor.LogInterceptor;
 import com.alvesguilherme.fastapi.model.ClienteFornecedor;
+import com.alvesguilherme.fastapi.model.Lancamento;
 import com.alvesguilherme.fastapi.model.Token;
 import okhttp3.OkHttpClient;
 
@@ -15,6 +17,8 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 @SuppressWarnings("unused")
 public class FastAPIClient {
+    public static final String ID_NAO_DEVE_SER_INFORMADO = "Id NÃO deve ser informado.";
+    public static final String ID_DEVE_SER_INFORMADO = "Id DEVE ser informado.";
     private final OkHttpClient client;
     private final FastAPIConfig fastAPiConfig;
 
@@ -32,18 +36,27 @@ public class FastAPIClient {
 
 
     public void cadastrarClienteForncedor(ClienteFornecedor clienteFornecedor) throws IOException {
-        if(Objects.nonNull(clienteFornecedor.getId())){
-            throw new IllegalStateException("Para cadastrar, id do cliente/fornecedor NÃO deve ser informado.");
-        }
+        if(Objects.nonNull(clienteFornecedor.getId())) throw new IllegalStateException(ID_NAO_DEVE_SER_INFORMADO);
         ClienteFornecedorAPI clienteFornecedorAPI = new ClienteFornecedorAPI(client, fastAPiConfig);
         clienteFornecedorAPI.enviar(clienteFornecedor);
     }
 
     public void atualizarClienteForncedor(ClienteFornecedor clienteFornecedor) throws IOException {
-        Objects.requireNonNull(clienteFornecedor.getId(),
-                "Para atualizar, id do cliente/fornecedor DEVE ser informado.");
+        Objects.requireNonNull(clienteFornecedor.getId(), ID_DEVE_SER_INFORMADO);
         ClienteFornecedorAPI clienteFornecedorAPI = new ClienteFornecedorAPI(client, fastAPiConfig);
         clienteFornecedorAPI.atualizar(clienteFornecedor);
+    }
+
+    public void cadastrarLancamento(Lancamento lancamento) throws IOException {
+        if(Objects.nonNull(lancamento.getId())) throw new IllegalStateException(ID_NAO_DEVE_SER_INFORMADO);
+        LancamentoAPI lancamentoAPI = new LancamentoAPI(client, fastAPiConfig);
+        lancamentoAPI.cadastrar(lancamento);
+    }
+
+    public void atualizarLancamento(Lancamento lancamento) throws IOException {
+        Objects.requireNonNull(lancamento.getId(), ID_DEVE_SER_INFORMADO);
+        LancamentoAPI lancamentoAPI = new LancamentoAPI(client, fastAPiConfig);
+        lancamentoAPI.atualizar(lancamento);
     }
 
     public static class Builder {
