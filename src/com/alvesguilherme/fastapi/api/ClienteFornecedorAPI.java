@@ -3,6 +3,7 @@ package com.alvesguilherme.fastapi.api;
 import com.alvesguilherme.fastapi.client.FastAPIConfig;
 import com.alvesguilherme.fastapi.exception.FastAPIError;
 import com.alvesguilherme.fastapi.model.ClienteFornecedor;
+import com.alvesguilherme.fastapi.utils.HttpMethod;
 import com.alvesguilherme.fastapi.utils.URLUtils;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -24,28 +25,19 @@ public class ClienteFornecedorAPI extends API {
     }
 
     public void enviar(ClienteFornecedor clienteFornecedor) throws IOException {
-        Request request = new Request.Builder()
-            .url(uri)
-            .post(buildResquestBody(clienteFornecedor))
-            .build();
-
-        try(Response response = client.newCall(request).execute()) {
-
-            if (response.isSuccessful()) {
-                Objects.requireNonNull(response.body(), "Responsebody nulo inesperado.");
-                ClienteFornecedor resp = gson.fromJson(response.body().string(), ClienteFornecedor.class);
-                clienteFornecedor.setId(resp.getId());
-                logger.info("Cadastrado com sucesso: " + resp.getId());
-            } else {
-                throw FastAPIError.from(response, "Body: "+ getSafeResponseBody(response));
-            }
-        }
+        enviar(clienteFornecedor, HttpMethod.POST);
+        logger.info("Cadastrado com sucesso: " + clienteFornecedor.getId());
     }
 
-    public void atualizar(ClienteFornecedor requestCliForn) throws IOException {
+    public void atualizar(ClienteFornecedor clienteFornecedor) throws IOException {
+        enviar(clienteFornecedor, HttpMethod.PUT);
+        logger.info("Id. cliente/fornecedor atualizado: " + clienteFornecedor.getId());
+    }
+
+    private void enviar(ClienteFornecedor requestCliForn, HttpMethod method) throws IOException {
         Request request = new Request.Builder()
                 .url(uri)
-                .put(buildResquestBody(requestCliForn))
+                .method(method.name(), buildResquestBody(requestCliForn))
                 .build();
 
         try(Response response = client.newCall(request).execute()) {
@@ -53,7 +45,7 @@ public class ClienteFornecedorAPI extends API {
             if (response.isSuccessful()) {
                 Objects.requireNonNull(response.body(), "Responsebody nulo inesperado.");
                 ClienteFornecedor resp = gson.fromJson(response.body().string(), ClienteFornecedor.class);
-                logger.info("Id. cliente/fornecedor atualizado: " + resp.getId());
+                requestCliForn.setId(resp.getId());
             } else {
                 throw FastAPIError.from(response, "Body: "+ getSafeResponseBody(response));
             }
