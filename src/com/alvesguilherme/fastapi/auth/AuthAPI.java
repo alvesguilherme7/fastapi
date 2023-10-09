@@ -1,7 +1,6 @@
 package com.alvesguilherme.fastapi.auth;
 
 import com.alvesguilherme.fastapi.api.ChamadaAPI;
-import com.alvesguilherme.fastapi.client.FastAPIClient;
 import com.alvesguilherme.fastapi.client.FastAPIConfig;
 import com.alvesguilherme.fastapi.model.Token;
 import com.alvesguilherme.fastapi.utils.URLUtils;
@@ -24,6 +23,9 @@ public class AuthAPI extends ChamadaAPI {
 
         if(Objects.isNull(config.getFuncGetToken())){
             pedirNovoToken();
+        }else{
+            this.token = new Token();
+            this.token.setAccessToken(config.getFuncGetToken().get());
         }
     }
 
@@ -48,8 +50,7 @@ public class AuthAPI extends ChamadaAPI {
         try(Response response = clientAuth.newCall(request).execute()){
             if (response.isSuccessful() && Objects.nonNull(response.body())){
 
-                this.token = FastAPIClient.getInstanceGson()
-                        .fromJson(response.body().string(), Token.class);
+                this.token = gson.fromJson(response.body().string(), Token.class);
 
                 salvarTokenArmazenamentoDuravel();
 

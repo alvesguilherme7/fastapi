@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 public class ChamadaAPI {
     protected final Logger logger = Logger.getLogger(FastAPIClient.class.getName());
     protected final MediaType jsonMediaType = MediaType.parse("application/json");
-    protected final Gson gson = FastAPIClient.getInstanceGson();
+    protected final Gson gson = new Gson();
 
     public RequestBody buildResquestBody(Object body){
         String json = gson.toJson(body);

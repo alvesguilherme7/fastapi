@@ -23,7 +23,7 @@ import java.util.Objects;
 
 public class ClienteFornecedor {
   @SerializedName("id")
-  private Integer id = 0;
+  private Integer id = null;
 
   @SerializedName("razao_social")
   private String razaoSocial = "";

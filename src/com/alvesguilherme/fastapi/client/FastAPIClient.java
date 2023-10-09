@@ -1,21 +1,20 @@
 package com.alvesguilherme.fastapi.client;
 
-import com.alvesguilherme.fastapi.api.PostClienteFornecedor;
+import com.alvesguilherme.fastapi.api.ClienteFornecedorAPI;
 import com.alvesguilherme.fastapi.auth.AuthAPI;
 import com.alvesguilherme.fastapi.interceptor.AuthInterceptor;
 import com.alvesguilherme.fastapi.interceptor.LogInterceptor;
 import com.alvesguilherme.fastapi.model.ClienteFornecedor;
 import com.alvesguilherme.fastapi.model.Token;
-import com.google.gson.Gson;
 import okhttp3.OkHttpClient;
 
 import java.io.IOException;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
-
+@SuppressWarnings("unused")
 public class FastAPIClient {
-    private static final Gson gson = new Gson();
     private final OkHttpClient client;
     private final FastAPIConfig fastAPiConfig;
 
@@ -31,13 +30,20 @@ public class FastAPIClient {
         this.fastAPiConfig = fastAPiConfig;
     }
 
-    public static Gson getInstanceGson(){
-        return gson;
+
+    public ClienteFornecedor cadastrarClienteForncedor(ClienteFornecedor clienteFornecedor) throws IOException {
+        if(Objects.nonNull(clienteFornecedor.getId())){
+            throw new IllegalStateException("Para cadastrar, id do cliente/fornecedor NÃO deve ser informado.");
+        }
+        ClienteFornecedorAPI clienteFornecedorAPI = new ClienteFornecedorAPI(client, fastAPiConfig);
+        return clienteFornecedorAPI.enviar(clienteFornecedor);
     }
 
-    public void cadastrarClienteForncedor(ClienteFornecedor clienteFornecedor) throws IOException {
-        PostClienteFornecedor postClienteFornecedor = new PostClienteFornecedor(client, fastAPiConfig);
-        postClienteFornecedor.enviar(clienteFornecedor);
+    public ClienteFornecedor atualizarClienteForncedor(ClienteFornecedor clienteFornecedor) throws IOException {
+        Objects.requireNonNull(clienteFornecedor.getId(),
+                "Para atualizar, id do cliente/fornecedor DEVE ser informado.");
+        ClienteFornecedorAPI clienteFornecedorAPI = new ClienteFornecedorAPI(client, fastAPiConfig);
+        return clienteFornecedorAPI.atualizar(clienteFornecedor);
     }
 
     public static class Builder {
