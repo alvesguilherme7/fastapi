@@ -22,26 +22,26 @@ public class ClienteFornecedorAPI extends ChamadaAPI {
                 .build();
     }
 
-    public ClienteFornecedor enviar(ClienteFornecedor requestCliForn) throws IOException {
+    public void enviar(ClienteFornecedor clienteFornecedor) throws IOException {
         Request request = new Request.Builder()
             .url(uri)
-            .post(buildResquestBody(requestCliForn))
+            .post(buildResquestBody(clienteFornecedor))
             .build();
 
         try(Response response = client.newCall(request).execute()) {
 
             if (response.isSuccessful()) {
                 Objects.requireNonNull(response.body(), "Responsebody nulo inesperado.");
-                ClienteFornecedor responseCliForn = gson.fromJson(response.body().string(), ClienteFornecedor.class);
-                logger.info("Cadastrado com sucesso: " + responseCliForn);
-                return responseCliForn;
+                ClienteFornecedor resp = gson.fromJson(response.body().string(), ClienteFornecedor.class);
+                clienteFornecedor.setId(resp.getId());
+                logger.info("Cadastrado com sucesso: " + resp.getId());
             } else {
                 throw FastAPIError.from(response, "Body: "+ getSafeResponseBody(response));
             }
         }
     }
 
-    public ClienteFornecedor atualizar(ClienteFornecedor requestCliForn) throws IOException {
+    public void atualizar(ClienteFornecedor requestCliForn) throws IOException {
         Request request = new Request.Builder()
                 .url(uri)
                 .put(buildResquestBody(requestCliForn))
@@ -51,9 +51,8 @@ public class ClienteFornecedorAPI extends ChamadaAPI {
 
             if (response.isSuccessful()) {
                 Objects.requireNonNull(response.body(), "Responsebody nulo inesperado.");
-                ClienteFornecedor responseCliForn = gson.fromJson(response.body().string(), ClienteFornecedor.class);
-                logger.info("Atualizado com sucesso: " + responseCliForn);
-                return responseCliForn;
+                ClienteFornecedor resp = gson.fromJson(response.body().string(), ClienteFornecedor.class);
+                logger.info("Id. cliente/fornecedor atualizado: " + resp.getId());
             } else {
                 throw FastAPIError.from(response, "Body: "+ getSafeResponseBody(response));
             }

@@ -31,19 +31,19 @@ public class FastAPIClient {
     }
 
 
-    public ClienteFornecedor cadastrarClienteForncedor(ClienteFornecedor clienteFornecedor) throws IOException {
+    public void cadastrarClienteForncedor(ClienteFornecedor clienteFornecedor) throws IOException {
         if(Objects.nonNull(clienteFornecedor.getId())){
             throw new IllegalStateException("Para cadastrar, id do cliente/fornecedor NÃO deve ser informado.");
         }
         ClienteFornecedorAPI clienteFornecedorAPI = new ClienteFornecedorAPI(client, fastAPiConfig);
-        return clienteFornecedorAPI.enviar(clienteFornecedor);
+        clienteFornecedorAPI.enviar(clienteFornecedor);
     }
 
-    public ClienteFornecedor atualizarClienteForncedor(ClienteFornecedor clienteFornecedor) throws IOException {
+    public void atualizarClienteForncedor(ClienteFornecedor clienteFornecedor) throws IOException {
         Objects.requireNonNull(clienteFornecedor.getId(),
                 "Para atualizar, id do cliente/fornecedor DEVE ser informado.");
         ClienteFornecedorAPI clienteFornecedorAPI = new ClienteFornecedorAPI(client, fastAPiConfig);
-        return clienteFornecedorAPI.atualizar(clienteFornecedor);
+        clienteFornecedorAPI.atualizar(clienteFornecedor);
     }
 
     public static class Builder {
