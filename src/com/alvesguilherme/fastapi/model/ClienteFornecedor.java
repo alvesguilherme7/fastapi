@@ -23,41 +23,36 @@ import java.util.Objects;
 
 public class ClienteFornecedor {
   @SerializedName("id")
-  private Integer id = null;
+  private Integer id;
 
   @SerializedName("razao_social")
-  private String razaoSocial = "";
+  private String razaoSocial;
 
   @SerializedName("nome")
-  private String nome = "";
+  private String nome;
 
   @SerializedName("cpfcnpj")
-  private String cpfcnpj = "";
+  private String cpfcnpj;
 
   @SerializedName("telefone")
-  private String telefone = "";
+  private String telefone;
 
   @SerializedName("email")
-  private String email = "";
+  private String email;
 
   @SerializedName("observacao")
-  private String observacao = "";
+  private String observacao;
 
   @SerializedName("grupoeconomico")
-  private String grupoeconomico = "";
+  private Integer grupoeconomico;
 
   @SerializedName("empresa")
-  private String empresa = "";
+  private Integer empresa;
 
   @SerializedName("fixo")
-  private Boolean fixo = false;
+  private Boolean fixo;
 
-  public ClienteFornecedor id(Integer id) {
-    this.id = id;
-    return this;
-  }
-
-   /**
+  /**
    * Get id
    * @return id
   **/
@@ -69,161 +64,36 @@ public class ClienteFornecedor {
     this.id = id;
   }
 
-  public ClienteFornecedor razaoSocial(String razaoSocial) {
-    this.razaoSocial = razaoSocial;
-    return this;
-  }
-
-   /**
-   * Get razaoSocial
-   * @return razaoSocial
-  **/
-  public String getRazaoSocial() {
-    return razaoSocial;
-  }
-
   public void setRazaoSocial(String razaoSocial) {
     this.razaoSocial = razaoSocial;
-  }
-
-  public ClienteFornecedor nome(String nome) {
-    this.nome = nome;
-    return this;
-  }
-
-   /**
-   * Get nome
-   * @return nome
-  **/
-
-  public String getNome() {
-    return nome;
   }
 
   public void setNome(String nome) {
     this.nome = nome;
   }
 
-  public ClienteFornecedor cpfcnpj(String cpfcnpj) {
-    this.cpfcnpj = cpfcnpj;
-    return this;
-  }
-
-   /**
-   * Get cpfcnpj
-   * @return cpfcnpj
-  **/
-
-  public String getCpfcnpj() {
-    return cpfcnpj;
-  }
-
   public void setCpfcnpj(String cpfcnpj) {
     this.cpfcnpj = cpfcnpj;
-  }
-
-  public ClienteFornecedor telefone(String telefone) {
-    this.telefone = telefone;
-    return this;
-  }
-
-   /**
-   * Get telefone
-   * @return telefone
-  **/
-
-  public String getTelefone() {
-    return telefone;
   }
 
   public void setTelefone(String telefone) {
     this.telefone = telefone;
   }
 
-  public ClienteFornecedor email(String email) {
-    this.email = email;
-    return this;
-  }
-
-   /**
-   * Get email
-   * @return email
-  **/
-
-  public String getEmail() {
-    return email;
-  }
-
   public void setEmail(String email) {
     this.email = email;
-  }
-
-  public ClienteFornecedor observacao(String observacao) {
-    this.observacao = observacao;
-    return this;
-  }
-
-   /**
-   * Get observacao
-   * @return observacao
-  **/
-
-  public String getObservacao() {
-    return observacao;
   }
 
   public void setObservacao(String observacao) {
     this.observacao = observacao;
   }
 
-  public ClienteFornecedor grupoeconomico(String grupoeconomico) {
-    this.grupoeconomico = grupoeconomico;
-    return this;
-  }
-
-   /**
-   * Get grupoeconomico
-   * @return grupoeconomico
-  **/
-
-  public String getGrupoeconomico() {
-    return grupoeconomico;
-  }
-
-  public void setGrupoeconomico(String grupoeconomico) {
+  public void setGrupoeconomico(Integer grupoeconomico) {
     this.grupoeconomico = grupoeconomico;
   }
 
-  public ClienteFornecedor empresa(String empresa) {
+  public void setEmpresa(Integer empresa) {
     this.empresa = empresa;
-    return this;
-  }
-
-   /**
-   * Get empresa
-   * @return empresa
-  **/
-
-  public String getEmpresa() {
-    return empresa;
-  }
-
-  public void setEmpresa(String empresa) {
-    this.empresa = empresa;
-  }
-
-  public ClienteFornecedor fixo(Boolean fixo) {
-    this.fixo = fixo;
-    return this;
-  }
-
-   /**
-   * Get fixo
-   * @return fixo
-  **/
-
-  public Boolean isFixo() {
-    return fixo;
   }
 
   public void setFixo(Boolean fixo) {

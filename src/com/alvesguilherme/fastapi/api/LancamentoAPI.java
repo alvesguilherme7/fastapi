@@ -32,7 +32,7 @@ public class LancamentoAPI extends API {
 
     public void atualizar(Lancamento lancamento) throws IOException {
         enviar(lancamento, HttpMethod.PUT);
-        logger.info("Lançamento cadastrado com sucesso: " + lancamento.getId());
+        logger.info("Lançamento atualizado com sucesso: " + lancamento.getId());
     }
 
     private void enviar(Lancamento lancamento, HttpMethod method) throws IOException {

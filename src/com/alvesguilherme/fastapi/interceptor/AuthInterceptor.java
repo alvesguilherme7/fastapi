@@ -4,10 +4,8 @@ import com.alvesguilherme.fastapi.auth.AuthAPI;
 import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
-import okio.Buffer;
 
 import java.io.IOException;
-import java.util.Objects;
 
 public class AuthInterceptor implements Interceptor {
     private final AuthAPI authAPI;

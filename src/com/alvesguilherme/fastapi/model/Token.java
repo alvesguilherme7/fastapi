@@ -27,31 +27,12 @@ public class Token {
   @SerializedName("token_type")
   private String tokenType;
 
-  @SerializedName("user")
-  private UtilsAuthUsuario user;
-
   public String getAccessToken() {
     return accessToken;
   }
 
   public void setAccessToken(String accessToken) {
     this.accessToken = accessToken;
-  }
-
-  public String getTokenType() {
-    return tokenType;
-  }
-
-  public void setTokenType(String tokenType) {
-    this.tokenType = tokenType;
-  }
-
-  public UtilsAuthUsuario getUser() {
-    return user;
-  }
-
-  public void setUser(UtilsAuthUsuario user) {
-    this.user = user;
   }
 
   @Override
@@ -64,13 +45,12 @@ public class Token {
     }
     Token token = (Token) o;
     return Objects.equals(this.accessToken, token.accessToken) &&
-        Objects.equals(this.tokenType, token.tokenType) &&
-        Objects.equals(this.user, token.user);
+        Objects.equals(this.tokenType, token.tokenType);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(accessToken, tokenType, user);
+    return Objects.hash(accessToken, tokenType);
   }
 
 
@@ -81,7 +61,6 @@ public class Token {
     
     sb.append("    accessToken: ").append(toIndentedString(accessToken)).append("\n");
     sb.append("    tokenType: ").append(toIndentedString(tokenType)).append("\n");
-    sb.append("    user: ").append(toIndentedString(user)).append("\n");
     sb.append("}");
     return sb.toString();
   }

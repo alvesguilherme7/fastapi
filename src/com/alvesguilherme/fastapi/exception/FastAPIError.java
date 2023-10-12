@@ -1,7 +1,5 @@
 package com.alvesguilherme.fastapi.exception;
 
-import java.util.Objects;
-
 public class FastAPIError extends RuntimeException {
     public FastAPIError(String s) {
         super(s);

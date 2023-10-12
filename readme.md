@@ -67,3 +67,52 @@ clienteFornecedor.setFixo(false);
 
 api.atualizarClienteForncedor(clienteFornecedor);
 ```
+
+Criação de Lançamento
+```java
+Lancamento lancamento = new Lancamento();
+lancamento.setAprovado(false);
+lancamento.setBanco(360);
+lancamento.setCheque("123");
+lancamento.setDocumento("123");
+lancamento.setClienteFornecedor(41196);
+lancamento.setContaGerencial(14696);
+lancamento.setDataFluxo(new Date());
+lancamento.setDataEmissao(new Date());
+lancamento.setDataVencimento(new Date());
+lancamento.setValor(BigDecimal.valueOf(100.0));
+lancamento.setDescricao("Lançamento de teste.");
+lancamento.setObservacoes("Sem dados");
+lancamento.setPrevisao(false);
+
+// após a chamada da API o atributo ID será preenchido
+api.cadastrarLancamento(lancamento);
+
+System.out.print(lancamento.getId());
+```
+
+Atualizar Lançamento
+```java
+Lancamento lancamento = new Lancamento();
+lancamento.setId(685190);
+lancamento.setAprovado(false);
+lancamento.setBanco(360);
+lancamento.setCheque("123");
+lancamento.setDocumento("123");
+lancamento.setClienteFornecedor(41196);
+lancamento.setContaGerencial(14696);
+lancamento.setDataFluxo(new Date());
+lancamento.setDataEmissao(new Date());
+lancamento.setDataVencimento(new Date());
+lancamento.setValor(BigDecimal.valueOf(100.0));
+lancamento.setDescricao("Lançamento de teste.");
+lancamento.setObservacoes("Sem dados");
+lancamento.setPrevisao(false);
+
+api.atualizarLancamento(lancamento);
+```
+
+<b>Tratamento de erros</b>  
+Respostas da API fora da faixa de sucesso HTTP - code 200 a 399 - 
+retornaram FastAPIException com com <i>responsebody</i>, caso exista.
+Nos serviços suportados, sempre há <i>responsebody</i>.

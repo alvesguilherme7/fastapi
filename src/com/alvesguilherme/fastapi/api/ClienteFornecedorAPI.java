@@ -26,12 +26,12 @@ public class ClienteFornecedorAPI extends API {
 
     public void enviar(ClienteFornecedor clienteFornecedor) throws IOException {
         enviar(clienteFornecedor, HttpMethod.POST);
-        logger.info("Cadastrado com sucesso: " + clienteFornecedor.getId());
+        logger.info("Cliente/Fornecedor cadastrado com sucesso: " + clienteFornecedor.getId());
     }
 
     public void atualizar(ClienteFornecedor clienteFornecedor) throws IOException {
         enviar(clienteFornecedor, HttpMethod.PUT);
-        logger.info("Id. cliente/fornecedor atualizado: " + clienteFornecedor.getId());
+        logger.info("Cliente/Fornecedor atualizado com sucesso: " + clienteFornecedor.getId());
     }
 
     private void enviar(ClienteFornecedor requestCliForn, HttpMethod method) throws IOException {
